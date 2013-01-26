@@ -78,7 +78,7 @@ namespace CardiacArrest
         public void ProvingGrounds()
         {
             drawFloor(14, 0, MapWidth);
-            BuildingGenerator(4, 3, 4, 14);
+            //BuildingGenerator(4, 3, 4, 14);
             addSewageCover(14, 12);
             addTrapDoor(14, 17);
             LadderLevellerLeft(5, 25, 10, 3);

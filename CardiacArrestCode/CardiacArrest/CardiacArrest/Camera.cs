@@ -13,28 +13,32 @@ namespace CardiacArrest
         static KeyboardState keyState = Keyboard.GetState();
         static KeyboardState oldKeyState;
 
-        static public void Update(TileMap myMap, int squaresAcross, int squaresDown)
+        static public void Update(TileMap myMap, int squaresAcross, int squaresDown, Vector2 PlayerPos, Vector2 ScreenSize)
         {
             keyState=Keyboard.GetState();
 
             if (keyState.IsKeyDown(Keys.Left))
             {
-                Camera.Location.X = MathHelper.Clamp(Camera.Location.X - 2, 0, (myMap.MapWidth - squaresAcross) * 32);
+                if(PlayerPos.X < ScreenSize.X / 3)
+                    Camera.Location.X = MathHelper.Clamp(Camera.Location.X--, 0, (myMap.MapWidth - squaresAcross) * 32);
             }
 
             if (keyState.IsKeyDown(Keys.Right))
             {
-                Camera.Location.X = MathHelper.Clamp(Camera.Location.X + 2, 0, (myMap.MapWidth - squaresAcross) * 32);
+                if(PlayerPos.X > (ScreenSize.X / 3) * 2)
+                    Camera.Location.X = MathHelper.Clamp(Camera.Location.X++, 0, (myMap.MapWidth - squaresAcross) * 32);
             }
 
             if (keyState.IsKeyDown(Keys.Up))
             {
-                Camera.Location.Y = MathHelper.Clamp(Camera.Location.Y - 2, 0, (myMap.MapHeight - squaresDown) * 32);
+                if(PlayerPos.Y < ScreenSize.Y / 3)
+                    Camera.Location.Y = MathHelper.Clamp(Camera.Location.Y--, 0, (myMap.MapHeight - squaresDown) * 32);
             }
 
             if (keyState.IsKeyDown(Keys.Down))
             {
-                Camera.Location.Y = MathHelper.Clamp(Camera.Location.Y + 2, 0, (myMap.MapHeight - squaresDown) * 32);
+                if(PlayerPos.Y > (ScreenSize.Y / 3) * 2)
+                    Camera.Location.Y = MathHelper.Clamp(Camera.Location.Y++, 0, (myMap.MapHeight - squaresDown) * 32);
             }
 
             oldKeyState = keyState;

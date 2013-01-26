@@ -47,34 +47,34 @@ namespace CardiacArrest
             backgroundBackspeed.X = backgroundMiddleRectangle.X;
         }
 
-        public void Update(int mapWidth, int movementSpeed)
+        public void Update(int mapWidth, int movementSpeed, Vector2 PlayerPos, Vector2 ScreenSize)
         {
             keystate = Keyboard.GetState();
             int basicSpeed = (mapWidth / 2) / movementSpeed;
             int divider = 20;
 
-            if(keystate.IsKeyDown(Keys.Left))
+            if(keystate.IsKeyDown(Keys.Left) && PlayerPos.X < ScreenSize.X / 3)
             {
                 backgroundFrontRectangle.X += basicSpeed / (2 * divider);
                 backgroundMiddleRectangle.X += basicSpeed / (4 * divider);
                 backgroundBackRectangle.X += basicSpeed / (6 * divider);
             }
 
-            if (keystate.IsKeyDown(Keys.Right))
+            if (keystate.IsKeyDown(Keys.Right) && PlayerPos.X > (ScreenSize.X / 3) * 2)
             {
                 backgroundFrontRectangle.X -= basicSpeed / (2 * divider);
                 backgroundMiddlespeed.X -= (float)basicSpeed / (4*divider);
                 backgroundBackspeed.X -= (float)basicSpeed / (6 * divider);
             }
 
-            if (keystate.IsKeyDown(Keys.Up))
+            if (keystate.IsKeyDown(Keys.Up) && PlayerPos.Y < (ScreenSize.Y / 3))
             {
                 backgroundFrontRectangle.Y -= basicSpeed / (2 * divider);
                 backgroundMiddleRectangle.Y -= basicSpeed / (4 * divider);
                 backgroundBackRectangle.Y -= basicSpeed / (6 * divider);
             }
 
-            if (keystate.IsKeyDown(Keys.Down))
+            if (keystate.IsKeyDown(Keys.Down) && PlayerPos.Y > (ScreenSize.Y / 3) * 2)
             {
                 backgroundFrontRectangle.Y += basicSpeed / (2 * divider);
                 backgroundMiddleRectangle.Y += basicSpeed / (4 * divider);

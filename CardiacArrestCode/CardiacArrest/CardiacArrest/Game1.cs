@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using EmitterTester;
+using SettingsClasses;
 
 namespace CardiacArrest
 {
@@ -370,10 +371,10 @@ namespace CardiacArrest
                             break;
                     }
 
-                    Camera.Update(myMap, squaresAcross, squaresDown);
+                    Camera.Update(myMap, squaresAcross, squaresDown, new Vector2(player.playerRectangle.X, player.playerRectangle.Y), ScreenSize);
 
 
-                    if (player.Update(GraphicsDevice))
+                    if (player.Update(GraphicsDevice, myMap, squaresAcross, squaresDown, ScreenSize))
                     {
                         playerGun.AddBullet(new Vector2(player.playerRectangle.X, player.playerRectangle.Y));
                     }
@@ -382,7 +383,7 @@ namespace CardiacArrest
                     //heartBeatTracker.UpdateTest(player,new Rectangle(screenWidth/2,screenHeight/2,5,5));
                     //heartBeatTracker.Update3(player, new Rectangle(screenWidth / 2, screenHeight, 5, 5), new Rectangle(0, 0, 5, 5), new Rectangle(screenWidth, 0, 5, 5));
                     player.Collision(myMap,squaresAcross,squaresDown);
-                    background.Update(200 * 32, 20);
+                    background.Update(200 * 32, 20, new Vector2(player.playerRectangle.X, player.playerRectangle.Y), ScreenSize);
                     enemy.Update(GraphicsDevice);
                     enemy.Update(gameTime);
                     Vector2 playerVec = new Vector2(0, 0);

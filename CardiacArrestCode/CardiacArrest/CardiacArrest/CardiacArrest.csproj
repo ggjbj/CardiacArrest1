@@ -94,6 +94,9 @@
     <Reference Include="mscorlib">
       <Private>False</Private>
     </Reference>
+    <Reference Include="SettingsClasses">
+      <HintPath>..\..\..\..\..\Three Thing Game\Oct 2012\SettingsClasses\SettingsClasses\bin\x86\Release\SettingsClasses.dll</HintPath>
+    </Reference>
     <Reference Include="System">
       <Private>False</Private>
     </Reference>

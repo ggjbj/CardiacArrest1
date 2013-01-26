@@ -11,7 +11,7 @@ namespace CardiacArrest
     class Player : SpriteAnimation
     {
         public Rectangle playerRectangle;
-        public float playerSpeed = 0f;
+        public float playerSpeed = 4f;
         public int health = 100;
 
         public Player(Texture2D Texture, int frames, int animations)
@@ -70,6 +70,7 @@ namespace CardiacArrest
 
             if (directionToPush == "Right")
             {
+               
                 Camera.Location.X = MathHelper.Clamp(Camera.Location.X + 2, 0, (myMap.MapWidth - squaresAcross) * 32);
             }
 
@@ -84,11 +85,98 @@ namespace CardiacArrest
             }
         }
 
+        public bool CanMoveUp(TileMap myMap, int squaresAcross, int squaresDown)
+        {
+            int tileColumn = (int)(((Camera.Location.X + Position.X) / 32));
+            int tileRow = (int)((Camera.Location.Y + Position.Y) / 32);
+            if (myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Cracked Ladder"] || myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Left Wall Ladder"] || myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Wall Ladder"] || myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Right Wall Ladder"] || myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Transparent Front Ladder"])
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool CanMoveDown(TileMap myMap, int squaresAcross, int squaresDown)
+        {
+            int tileColumn = (int)(((Camera.Location.X + Position.X) / 32));
+            int tileRow = (int)((Camera.Location.Y + Position.Y) / 32);
+            if (myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Cracked Ladder"] || myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Left Wall Ladder"] || myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Wall Ladder"] || myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Right Wall Ladder"] || myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Transparent Front Ladder"])
+            {
+                return true;
+            }
+            else if (myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Trap Door"])
+            {
+                return true;
+            }
+            else if (myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Seweage Man Hole"])
+            {
+                return true;
+            }
+            else if (myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Ceiling"])
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool CanMoveLeft(TileMap myMap, int squaresAcross, int squaresDown)
+        {
+            int tileColumn = (int)(((Camera.Location.X + Position.X) / 32));
+            int tileRow = (int)((Camera.Location.Y + Position.Y) / 32);
+            if (myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Floor"] || myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Cracked Floor"])
+            {
+                return true;
+            }
+            else if (myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Cracked Ladder"] || myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Left Wall Ladder"] || myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Wall Ladder"] || myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Right Wall Ladder"] || myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Transparent Front Ladder"])
+            {
+                return true;
+            }
+            else if (myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Trap Door"])
+            {
+                return true;
+            }
+            else if (myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Seweage Man Hole"])
+            {
+                return true;
+            }
+            else if (myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Ceiling"])
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool CanMoveRight(TileMap myMap, int squaresAcross, int squaresDown)
+        {
+            int tileColumn = (int)(((Camera.Location.X + Position.X) / 32));
+            int tileRow = (int)((Camera.Location.Y + Position.Y) / 32);
+            if (myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Floor"] || myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Cracked Floor"])
+            {
+                return true;
+            }
+            else if (myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Empty"] && myMap.Rows[tileRow + 1].Columns[tileColumn].TileID == myMap.Tiles["Empty"])
+            {
+                return true;
+            }
+            else if (myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Cracked Ladder"] || myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Left Wall Ladder"] || myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Wall Ladder"] || myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Right Wall Ladder"] || myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Transparent Front Ladder"])
+            {
+                return true;
+            }
+            else if (myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Trap Door"])
+            {
+                return true;
+            }
+            else if (myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Seweage Man Hole"])
+            {
+                return true;
+            }
+            else if (myMap.Rows[tileRow].Columns[tileColumn].TileID == myMap.Tiles["Ceiling"])
+            {
+                return true;
+            }
+            return false;
+        }
 
         public void Collision(TileMap myMap, int squaresAcross, int squaresDown)
         {
             KeyboardState kbState = Keyboard.GetState();
-
             int tileColumn = (int) (((Camera.Location.X+Position.X)/32));
             int tileRow = (int)((Camera.Location.Y+Position.Y) / 32);
 
@@ -144,7 +232,7 @@ namespace CardiacArrest
             }
 
 
-        public bool Update(GraphicsDevice graphicsDevice)
+        public bool Update(GraphicsDevice graphicsDevice, TileMap myMap, int squaresAcross, int squaresDown, Vector2 ScreenSize)
         {
             KeyboardState kbState = Keyboard.GetState();
 
@@ -152,34 +240,74 @@ namespace CardiacArrest
 
             if (kbState.IsKeyDown(Keys.Right))
             {
-                Position.X += playerSpeed;
+                //if(CanMoveRight(myMap, squaresAcross, squaresDown))
+                //{
+                if (playerRectangle.X <= (ScreenSize.X / 3) * 2)
+                {
+                    Position.X += playerSpeed;
 
-                if (Animation != "Walking")
-                    Animation = "Walking";
+                    if (Animation != "Walking")
+                        Animation = "Walking";
+                }
+                else
+                {
+                    pushCharacter("Right", myMap, squaresAcross, squaresDown);
+                }
+                //}
             }
 
             else if (kbState.IsKeyDown(Keys.Left))
             {
-                Position.X -= playerSpeed;
- 
-                if (Animation != "Walking")
-                    Animation = "Walking";
+                //if (CanMoveLeft(myMap, squaresAcross, squaresDown))
+                //{
+                if (playerRectangle.X >= (ScreenSize.X / 3))
+                {
+                    Position.X -= playerSpeed;
+
+                    if (Animation != "Walking")
+                        Animation = "Walking";
+                    //}
+                }
+                else
+                {
+                    pushCharacter("Left", myMap, squaresAcross, squaresDown);
+                }
             }
 
             else if (kbState.IsKeyDown(Keys.Down))
             {
-                Position.Y += playerSpeed;
+                //if (CanMoveDown(myMap, squaresAcross, squaresDown))
+                //{
+                if (playerRectangle.Y <= (ScreenSize.Y / 3) * 2)
+                {
+                    Position.Y += playerSpeed;
 
-                if (Animation != "Crouch")
-                    Animation = "Crouch";
+                    if (Animation != "Crouch")
+                        Animation = "Crouch";
+                }
+                else
+                {
+                    pushCharacter("Down", myMap, squaresAcross, squaresDown);
+                }
+                //}
             }
 
             else if (kbState.IsKeyDown(Keys.Up))
             {
-                Position.Y -= playerSpeed;
+                //if (CanMoveUp(myMap, squaresAcross, squaresDown))
+                //{
+                if (playerRectangle.X >= (ScreenSize.X / 3))
+                {
+                    Position.Y -= playerSpeed;
 
-                if (Animation != "Climb")
-                    Animation = "Climb";
+                    if (Animation != "Climb")
+                        Animation = "Climb";
+                }
+                else
+                {
+                    pushCharacter("Up", myMap, squaresAcross, squaresDown);
+                }
+               // }
             }
 
             else if (kbState.IsKeyDown(Keys.Space))

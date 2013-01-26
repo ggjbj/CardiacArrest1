@@ -95,3 +95,5 @@ C:\Users\iPud\Documents\GitHub\CardiacArrest1\CardiacArrestCode\CardiacArrest\Ca
 C:\Users\iPud\Documents\GitHub\CardiacArrest1\CardiacArrestCode\CardiacArrest\CardiacArrest\bin\x86\Debug\Content\case.xnb
 C:\Users\iPud\Documents\GitHub\CardiacArrest1\CardiacArrestCode\CardiacArrest\CardiacArrest\bin\x86\Debug\Content\cFont.xnb
 C:\Users\iPud\Documents\GitHub\CardiacArrest1\CardiacArrestCode\CardiacArrest\CardiacArrest\bin\x86\Debug\Content\raindrop.xnb
+C:\Users\iPud\Documents\GitHub\CardiacArrest1\CardiacArrestCode\CardiacArrest\CardiacArrest\bin\x86\Debug\SettingsClasses.dll
+C:\Users\iPud\Documents\GitHub\CardiacArrest1\CardiacArrestCode\CardiacArrest\CardiacArrest\bin\x86\Debug\SettingsClasses.pdb
