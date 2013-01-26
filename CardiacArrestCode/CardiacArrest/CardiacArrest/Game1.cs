@@ -51,7 +51,7 @@ namespace CardiacArrest
 
         MoveState enemyState = MoveState.idle;
         SpriteFont CaseFont;
-
+        ParticleSystem ParticleEffects;
         #region player Attributes
         PlayerData playerData;
         #endregion
@@ -174,7 +174,13 @@ namespace CardiacArrest
             playerData = PlayerData.Load();
 
             //heartBeatTracker = new HeartBeatTracker(Content.Load<SoundEffect>("heartBeat"));
-
+            ParticleEffects = new ParticleSystem(Vector2.Zero);
+            ParticleEffects.AddEmitter(new Vector2(0.001f, 0.6f),
+                                            new Vector2(0, 1), new Vector2(0.0f * MathHelper.Pi, 0.0f * -MathHelper.Pi),
+                                            new Vector2(1f, 1f),
+                                            new Vector2(60, 70), new Vector2(15, 15f),
+                                            Color.White, Color.White, Color.White, Color.White,
+                                            new Vector2(0, 700), new Vector2(0, 120), 500, new Vector2(100, 100), Content.Load<Texture2D>("raindrop"), 0, (int)ScreenSize.X);
             if (playerData == null)
             {
                 playerData = new PlayerData(100, 0.0f, 0, 0);
@@ -397,6 +403,7 @@ namespace CardiacArrest
                             playerData.AddCase(item.Key);
                         }
                     }
+                    ParticleEffects.Update(gameTime.ElapsedGameTime.Milliseconds / 1000f);
                     break;
 
                 case GameState.pause:
@@ -490,6 +497,7 @@ namespace CardiacArrest
                     {
                         item.Value.Draw(spriteBatch, CaseFont);
                     }
+                    ParticleEffects.Draw(spriteBatch, 1, Vector2.Zero);
                     break;
 
                 case GameState.pause:

@@ -190,6 +190,15 @@
       <Output>C:\Users\iPud\Documents\GitHub\CardiacArrest1\CardiacArrestCode\CardiacArrest\CardiacArrest\bin\x86\Debug\Content\cFont.xnb</Output>
       <Time>2013-01-26T16:57:59.2286626+00:00</Time>
     </Item>
+    <Item>
+      <Source>raindrop.png</Source>
+      <Name>raindrop</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\iPud\Documents\GitHub\CardiacArrest1\CardiacArrestCode\CardiacArrest\CardiacArrest\bin\x86\Debug\Content\raindrop.xnb</Output>
+      <Time>2013-01-26T17:19:12.9535155+00:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{50C4B848-13AA-411E-8681-27A04DCEA394}</ContentProjectGUID>
