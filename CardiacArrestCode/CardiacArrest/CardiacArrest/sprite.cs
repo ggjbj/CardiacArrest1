@@ -54,6 +54,15 @@ namespace CardiacArrest
         {
             return new Vector2(rectangle.X, rectangle.Y);
         }
+        public virtual Sprite Copy()
+        {
+            return new Sprite(texture, rectangle, rotation, flipping, color);
+        }
+        public virtual void SetPos(Vector2 pos)
+        {
+            rectangle.X = (int)pos.X;
+            rectangle.Y = (int)pos.Y;
+        }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
@@ -106,32 +115,36 @@ namespace CardiacArrest
 
     class PopUp : Sprite
     {
-         public PopUp(Texture2D newTexture, Rectangle newRectangle, float inRotation, SpriteEffects inFlipping, Color inColor):base(newTexture,newRectangle, inRotation, inFlipping, inColor)
-        
+        protected string text;
+        protected Vector2 TextPos;
+        protected bool ShowMe;
+        public PopUp(Texture2D newTexture, Rectangle newRectangle, float inRotation, SpriteEffects inFlipping, Color inColor, string _text, Vector2 _textPos)
+            : base(newTexture, newRectangle, inRotation, inFlipping, inColor)
         {
+            text = _text;
+            TextPos = _textPos;
         }
 
         public override void Update(GraphicsDevice graphicsDevice)
         {
         }
-    }
 
-    class CaseFile : PopUp
-    {
-        public bool isFound;
-
-        public CaseFile(Texture2D newTexture, Rectangle newRectangle, float inRotation, SpriteEffects inFlipping, Color inColor):base(newTexture,newRectangle, inRotation, inFlipping, inColor)
+        public virtual void Draw(SpriteBatch theSpriteBatch, SpriteFont font)
         {
-        }
-
-        public override void Update(GraphicsDevice graphicsDevice)
-        {
+            if (ShowMe)
+            {
+                base.Draw(theSpriteBatch);
+                theSpriteBatch.DrawString(font, text, TextPos, Color.Black);
+            }
         }
     }
+
+
 
     class Pause : PopUp
     {
-        public Pause(Texture2D newTexture, Rectangle newRectangle, float inRotation, SpriteEffects inFlipping, Color inColor):base(newTexture,newRectangle, inRotation, inFlipping, inColor)
+        public Pause(Texture2D newTexture, Rectangle newRectangle, float inRotation, SpriteEffects inFlipping, Color inColor, string text, Vector2 TextPos)
+            : base(newTexture, newRectangle, inRotation, inFlipping, inColor, text, TextPos)
         {
         }
 
@@ -142,7 +155,8 @@ namespace CardiacArrest
 
     class ClueAssembler : PopUp
     {
-        public ClueAssembler(Texture2D newTexture, Rectangle newRectangle, float inRotation, SpriteEffects inFlipping, Color inColor):base(newTexture,newRectangle, inRotation, inFlipping, inColor)
+        public ClueAssembler(Texture2D newTexture, Rectangle newRectangle, float inRotation, SpriteEffects inFlipping, Color inColor, string text, Vector2 TextPos)
+            : base(newTexture, newRectangle, inRotation, inFlipping, inColor, text, TextPos)
         {
         }
 
@@ -150,4 +164,5 @@ namespace CardiacArrest
         {
         }
     }
+
 }

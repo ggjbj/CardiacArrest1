@@ -9,11 +9,13 @@ Content\betaJesterRed2.xnb
 Content\Tron_Charcter2.xnb
 Content\popUp.xnb
 Content\bullet.xnb
-Content\IxJingle.xnb
-Content\GGJ13_Theme.xnb
-Content\heartBeat.xnb
 Content\gameBackground.xnb
 Content\gameBackgroundBack.xnb
 Content\gameBackgroundFront.xnb
 Content\gameBackgroundMiddle.xnb
 Content\TileSet.xnb
+Content\IxJingle.xnb
+Content\GGJ13_Theme.xnb
+Content\heartBeat.xnb
+Content\case.xnb
+Content\cFont.xnb

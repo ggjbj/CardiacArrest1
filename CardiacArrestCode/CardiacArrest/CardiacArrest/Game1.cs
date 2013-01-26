@@ -50,6 +50,7 @@ namespace CardiacArrest
         }
 
         MoveState enemyState = MoveState.idle;
+        SpriteFont CaseFont;
 
         #region player Attributes
         PlayerData playerData;
@@ -61,10 +62,7 @@ namespace CardiacArrest
         int enemyHealth = 10;
 
         // overall cases and clues: player collected ones will go into the PlayerData class
-        List<CaseFile> caseList = new List<CaseFile>();
-        List<CaseFile> clueList = new List<CaseFile>();
-
-        Dictionary<string,CaseFile> levelCases = new Dictionary<string,CaseFile>();
+        Dictionary<string, CaseFile> caseList = new Dictionary<string, CaseFile>();
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -131,20 +129,15 @@ namespace CardiacArrest
             screenHeight = GraphicsDevice.Viewport.Height;
 
             BulletDir = Vector2.Zero;
+            noOfClues = 5;
 
-            // List of clues
-            #region clueList
-            for (int i = 0; i < noOfClues; i++)
-            {
-                clueList.Add(new CaseFile(Content.Load<Texture2D>("clue" + noOfClues), new Rectangle(10, 10, 150, 200), 0.0f, SpriteEffects.None, Color.White));
-            }
-            #endregion
 
             // List of cases
             #region caseList
-            for (int i = 0; i < noOfCases; i++)
+            Sprite CaseItem = new Sprite(Content.Load<Texture2D>("case"), new Rectangle(0, 0, Content.Load<Texture2D>("case").Width, Content.Load<Texture2D>("case").Height), 0.0f, SpriteEffects.None, Color.White);
+            for (int i = 0; i < noOfClues; i++)
             {
-                caseList.Add(new CaseFile(Content.Load<Texture2D>("case" + noOfCases), new Rectangle(10, 10, 150, 200), 0.0f, SpriteEffects.None, Color.White));
+                caseList.Add("Case" + i.ToString(), new CaseFile(Content.Load<Texture2D>("popUp"), new Rectangle(10, 10, 150, 200), new Rectangle(0, 0, 3200, 2400), 0.0f, SpriteEffects.None, Color.White, CaseItem.Copy(), "lol", "hehe", Vector2.Zero));
             }
             #endregion
 
@@ -172,14 +165,15 @@ namespace CardiacArrest
                 Content.Load<Texture2D>("Tron_Charcter2"), 8, 3);
 
             enemy.Load();
+            CaseFont = Content.Load<SpriteFont>("cFont");
 
             splashScreen = new Sprite(Content.Load<Texture2D>("betaJester1"), new Rectangle(0, 0, screenWidth, screenHeight), 0.0f, SpriteEffects.None, Color.White);
-            ixjingle = Content.Load<SoundEffect>("ixjingle");
-            heartBeatIntro = Content.Load<SoundEffect>("GGJ13_Theme");
+            //ixjingle = Content.Load<SoundEffect>("ixjingle");
+            //heartBeatIntro = Content.Load<SoundEffect>("GGJ13_Theme");
             background = new Background(Content.Load<Texture2D>("gamebackground"), Content.Load<Texture2D>("gamebackgroundback"), Content.Load<Texture2D>("gamebackgroundmiddle"), Content.Load<Texture2D>("gamebackgroundfront"), 200 * 32, screenWidth, screenHeight);
             playerData = PlayerData.Load();
 
-            heartBeatTracker = new HeartBeatTracker(Content.Load<SoundEffect>("heartBeat"));
+            //heartBeatTracker = new HeartBeatTracker(Content.Load<SoundEffect>("heartBeat"));
 
             if (playerData == null)
             {
@@ -380,7 +374,7 @@ namespace CardiacArrest
                     player.Update(gameTime);
                     
                     //heartBeatTracker.UpdateTest(player,new Rectangle(screenWidth/2,screenHeight/2,5,5));
-                    heartBeatTracker.Update3(player, new Rectangle(screenWidth / 2, screenHeight, 5, 5), new Rectangle(0, 0, 5, 5), new Rectangle(screenWidth, 0, 5, 5));
+                    //heartBeatTracker.Update3(player, new Rectangle(screenWidth / 2, screenHeight, 5, 5), new Rectangle(0, 0, 5, 5), new Rectangle(screenWidth, 0, 5, 5));
                     player.Collision(myMap,squaresAcross,squaresDown);
                     background.Update(200 * 32, 20);
                     enemy.Update(GraphicsDevice);
@@ -396,6 +390,13 @@ namespace CardiacArrest
                     }
                     playerGun.Update(new Vector2(player.playerRectangle.X, player.playerRectangle.Y), player.playerRectangle.Width, new Vector2(player.playerSpeed, 0), playerVec, (int)ScreenSize.X, enemy.enemyRectangle, enemyHealth, 0.0f, (int)ScreenSize.Y);
                     playerData.SetHealth(enemyGun.Update(new Vector2(enemy.enemyRectangle.X, enemy.enemyRectangle.Y), enemy.enemyRectangle.Width, new Vector2(enemy.enemySpeed, 0), BulletDir, (int)ScreenSize.X, player.playerRectangle, playerData.GetHealth(), 0.0f, (int)ScreenSize.Y));
+                    foreach (KeyValuePair<string, CaseFile> item in caseList)
+                    {
+                        if (item.Value.Update(player.playerRectangle))
+                        {
+                            playerData.AddCase(item.Key);
+                        }
+                    }
                     break;
 
                 case GameState.pause:
@@ -485,6 +486,10 @@ namespace CardiacArrest
                     enemy.Draw(spriteBatch);
                     enemyGun.Draw(spriteBatch);
                     playerGun.Draw(spriteBatch);
+                    foreach (KeyValuePair<string, CaseFile> item in caseList)
+                    {
+                        item.Value.Draw(spriteBatch, CaseFont);
+                    }
                     break;
 
                 case GameState.pause:
